@@ -1,0 +1,39 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // User profile documents
+    match /users/{userId} {
+      allow read, write: if isOwner(userId);
+
+      // User's custom workouts
+      match /workouts/{workoutId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // User's workout history logs
+      match /history/{historyId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // User's personal records (PRs)
+      match /records/{recordId} {
+        allow read, write: if isOwner(userId);
+      }
+    }
+
+    // Public / shared exercise library
+    match /exercises/{exerciseId} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "FitPro — Seu Treino, Seu Ritmo",
+  "description": "Aplicativo de treinos com planejamento semanal, execução com cronômetro de séries, sistema de conquistas e medalhas compartilháveis, e exportação de rotina em PDF e Foto.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

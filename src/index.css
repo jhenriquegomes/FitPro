@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@media print {
+  html, body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Hide all app chrome, navigation, headers when printing PDF */
+  header, nav, footer, #app-navigation, button, .no-print, aside, [role="navigation"] {
+    display: none !important;
+  }
+
+  /* Reset fixed modal wrappers during printing */
+  .fixed, .overflow-y-auto, .max-h-\[94vh\], .max-h-\[92vh\] {
+    position: static !important;
+    background: #ffffff !important;
+    backdrop-filter: none !important;
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Show only the printable document */
+  #printable-weekly-pdf {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 16px !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+    border: none !important;
+    page-break-inside: auto;
+  }
+
+  #printable-weekly-pdf * {
+    color: #000000 !important;
+    border-color: #cbd5e1 !important;
+    background-color: transparent !important;
+  }
+
+  #printable-weekly-pdf thead tr,
+  #printable-weekly-pdf .bg-slate-50 {
+    background-color: #f1f5f9 !important;
+  }
+
+  #printable-weekly-pdf .print-border {
+    border: 1px solid #94a3b8 !important;
+  }
+}
+

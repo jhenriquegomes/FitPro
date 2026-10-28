@@ -1,0 +1,115 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile, physical metrics, preferences, streak and authentication state.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "avatarUrl": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "admin"] },
+        "isPro": { "type": "boolean" },
+        "age": { "type": "number" },
+        "height": { "type": "number" },
+        "weight": { "type": "number" },
+        "goal": { "type": "string" },
+        "experienceLevel": { "type": "string" },
+        "daysPerWeek": { "type": "number" },
+        "trainingLocation": { "type": "string" },
+        "streakDays": { "type": "number" },
+        "lastWorkoutDate": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "role"]
+    },
+    "Workout": {
+      "title": "Workout",
+      "description": "A scheduled or saved workout routine.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "category": { "type": "string" },
+        "targetDurationMin": { "type": "number" },
+        "isFavorite": { "type": "boolean" },
+        "exercises": { "type": "array" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "title"]
+    },
+    "WorkoutHistoryItem": {
+      "title": "WorkoutHistoryItem",
+      "description": "A completed workout session log.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "workoutId": { "type": "string" },
+        "workoutTitle": { "type": "string" },
+        "date": { "type": "string" },
+        "durationSeconds": { "type": "number" },
+        "totalExercises": { "type": "number" },
+        "totalSets": { "type": "number" },
+        "totalVolumeKg": { "type": "number" },
+        "estimatedCalories": { "type": "number" },
+        "exercisesLog": { "type": "array" }
+      },
+      "required": ["id", "userId", "workoutTitle", "date"]
+    },
+    "PersonalRecord": {
+      "title": "PersonalRecord",
+      "description": "User personal weight record for an exercise.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "exerciseId": { "type": "string" },
+        "exerciseName": { "type": "string" },
+        "maxLoadKg": { "type": "number" },
+        "repsAtMax": { "type": "number" },
+        "achievedDate": { "type": "string" }
+      },
+      "required": ["id", "userId", "exerciseName", "maxLoadKg"]
+    },
+    "Exercise": {
+      "title": "Exercise",
+      "description": "A fitness exercise in the exercise library.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "primaryMuscle": { "type": "string" },
+        "equipment": { "type": "string" },
+        "level": { "type": "string" },
+        "type": { "type": "string" }
+      },
+      "required": ["id", "name", "primaryMuscle", "equipment"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile documents"
+    },
+    "/users/{userId}/workouts/{workoutId}": {
+      "schema": "Workout",
+      "description": "Workouts owned by a specific user"
+    },
+    "/users/{userId}/history/{historyId}": {
+      "schema": "WorkoutHistoryItem",
+      "description": "Workout completion logs for a user"
+    },
+    "/users/{userId}/records/{recordId}": {
+      "schema": "PersonalRecord",
+      "description": "Personal PR records for a user"
+    },
+    "/exercises/{exerciseId}": {
+      "schema": "Exercise",
+      "description": "Global or public exercises database"
+    }
+  }
+}
